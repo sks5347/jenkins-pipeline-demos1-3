@@ -1,14 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'mcr.microsoft.com/dotnet/sdk:6.0'
+        }
+    }
     
     stages {
-        stage('Initialize'){
-            steps{
-                sh 'docker --version'
-                sh "def dockerHome = tool 'myDocker'"
-                sh 'env.PATH = "${dockerHome}/bin:${env.PATH}"'
-            }
-         }
         stage('Verify') {
             steps {
                 sh '''
